@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-kampurse-green: #639922;
+  --color-kampurse-green-dark: #3b6d11;
+  --color-kampurse-green-darker: #27500a;
+  --color-kampurse-green-light: #eaf3de;
+  --color-kampurse-urgent: #e24b4a;
+  --color-kampurse-urgent-light: #fcebeb;
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --font-sans: var(--font-montserrat), sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f7f8f6;
+  --border: #e5e7e0;
+  --foreground: #1a1a1a;
+  --foreground-muted: #6b6f66;
+}
+
+.dark {
+  --background: #121212;
+  --surface: #1a1a1a;
+  --surface-muted: #232323;
+  --border: #2e2e2e;
+  --foreground: #f2f2f2;
+  --foreground-muted: #a3a3a3;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
