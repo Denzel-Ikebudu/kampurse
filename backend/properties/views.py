@@ -3,7 +3,6 @@ import django_filters
 from .models import Property
 from .serializers import PropertyListSerializer, PropertyDetailSerializer
 
-
 class PropertyFilter(django_filters.FilterSet):
     campus = django_filters.CharFilter(field_name="campus__short_code", lookup_expr="iexact")
     room_type = django_filters.CharFilter(field_name="room_type", lookup_expr="iexact")

@@ -61,3 +61,64 @@ export interface PropertyDetail {
   is_featured: boolean;
   created_at: string;
 }
+
+export interface ItemImage {
+  id: number;
+  image: string;
+  is_cover: boolean;
+  order: number;
+}
+
+export interface ItemListItem {
+  id: number;
+  title: string;
+  slug: string;
+  campus: string;
+  category: string;
+  condition: string;
+  price: string;
+  is_distress_sale: boolean;
+  discount_percentage: string | null;
+  status: string;
+  is_featured: boolean;
+  cover_image: string | null;
+}
+
+export interface ItemCategory {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface ItemDetail {
+  id: number;
+  title: string;
+  slug: string;
+  campus: string;
+  category: ItemCategory;
+  condition: string;
+  price: string;
+  description: string;
+  is_distress_sale: boolean;
+  distress_reason: string;
+  discount_percentage: string | null;
+  images: ItemImage[];
+  status: string;
+  is_featured: boolean;
+  created_at: string;
+}
+export interface RoommateRequestItem {
+  id: number;
+  student_name: string;
+  campus: string;
+  preferred_location: string;
+  linked_property: number | null;
+  linked_property_title: string | null;
+  gender_preference: string;
+  budget_min: string | null;
+  budget_max: string | null;
+  move_in_date: string | null;
+  description: string;
+  status: string;
+  created_at: string;
+}

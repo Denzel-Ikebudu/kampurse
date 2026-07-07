@@ -25,3 +25,42 @@ export async function getPropertyBySlug(slug: string) {
 
   return res.json();
 }
+
+export async function getItems(searchParams?: Record<string, string>) {
+  const query = searchParams ? `?${new URLSearchParams(searchParams)}` : "";
+  const res = await fetch(`${API_BASE_URL}/items/${query}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch items");
+  }
+
+  return res.json();
+}
+
+export async function getItemBySlug(slug: string) {
+  const res = await fetch(`${API_BASE_URL}/items/${slug}/`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    if (res.status === 404) return null;
+    throw new Error("Failed to fetch item");
+  }
+
+  return res.json();
+}
+
+export async function getRoommateRequests(searchParams?: Record<string, string>) {
+  const query = searchParams ? `?${new URLSearchParams(searchParams)}` : "";
+  const res = await fetch(`${API_BASE_URL}/roommates/${query}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch roommate requests");
+  }
+
+  return res.json();
+}
