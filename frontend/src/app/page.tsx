@@ -1,26 +1,16 @@
 import Header from "@/components/Header";
-import PropertyCard from "@/components/PropertyCard";
-import { getProperties } from "@/lib/api";
-import { PropertyListItem, PaginatedResponse } from "@/types";
+import Link from "next/link";
 
-export default async function Home() {
-  const data: PaginatedResponse<PropertyListItem> = await getProperties({ campus: "unn" });
-
+export default function Home() {
   return (
     <>
       <Header />
-      <main className="max-w-6xl mx-auto px-4 py-6">
-        <h1 className="text-xl font-medium mb-4">Lodges near UNN</h1>
-
-        {data.results.length === 0 ? (
-          <p className="text-foreground-muted text-sm">No listings yet.</p>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {data.results.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
-        )}
+      <main className="max-w-6xl mx-auto px-4 py-10 text-center">
+        <h1 className="text-2xl font-medium mb-3">Welcome to Kampurse</h1>
+        <p className="text-foreground-muted mb-6">Find lodges, buy and sell items, and connect with roommates at UNN.</p>
+        <Link href="/lodges" className="inline-block bg-kampurse-green text-white px-5 py-2.5 rounded-md text-sm">
+          Browse Lodges
+        </Link>
       </main>
     </>
   );

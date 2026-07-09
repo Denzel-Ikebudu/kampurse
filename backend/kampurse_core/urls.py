@@ -24,6 +24,8 @@ urlpatterns = [
     path('api/', include('properties.urls')),
     path('api/', include('marketplace.urls')),
     path('api/', include('roommates.urls')),
+    path('api/', include('transactions.urls')),
+
 ]
 
 if settings.DEBUG:

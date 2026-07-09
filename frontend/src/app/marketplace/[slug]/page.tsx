@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import { getItemBySlug } from "@/lib/api";
 import { ItemDetail } from "@/types";
+import ReserveButton from "@/components/ReserveButton"
 
 export default async function ItemDetailPage({
   params,
@@ -63,9 +64,13 @@ export default async function ItemDetailPage({
                 </span>
               )}
             </div>
-            <button className="w-full bg-kampurse-green text-white text-sm py-2.5 rounded-md hover:bg-kampurse-green-dark transition-colors">
-              I&apos;m interested
-            </button>
+            <ReserveButton
+              type="item"
+              id={item.id}
+              title={item.title}
+              price={item.price}
+              ctaLabel="I'm interested"
+            />
           </div>
         </div>
 

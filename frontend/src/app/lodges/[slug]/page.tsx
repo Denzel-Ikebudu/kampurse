@@ -3,6 +3,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import { getPropertyBySlug } from "@/lib/api";
 import { PropertyDetail } from "@/types";
+import ReserveButton from "@/components/ReserveButton"
 
 export default async function LodgeDetailPage({
   params,
@@ -56,9 +57,13 @@ export default async function LodgeDetailPage({
             <p className="text-xs text-foreground-muted mb-3">
               &#8358;{Number(property.subsequent_price).toLocaleString()} / year after
             </p>
-            <button className="w-full bg-kampurse-green text-white text-sm py-2.5 rounded-md hover:bg-kampurse-green-dark transition-colors">
-              Reserve now
-            </button>
+            <ReserveButton
+              type="property"
+              id={property.id}
+              title={property.title}
+              price={property.initial_price}
+              ctaLabel="Reserve now"
+            />
           </div>
         </div>
 
