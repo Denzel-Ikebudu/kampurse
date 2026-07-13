@@ -122,3 +122,11 @@ export interface RoommateRequestItem {
   status: string;
   created_at: string;
 }
+export interface AnalyticsSummary {
+  daily_views: { day: string; count: number }[];
+  top_properties: { title: string; view_count: number }[];
+  top_items: { title: string; view_count: number }[];
+  transaction_status_breakdown: { status: string; count: number }[];
+  completed_revenue: number;
+  total_views_7d: number;
+}

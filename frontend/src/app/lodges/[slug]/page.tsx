@@ -3,7 +3,8 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import { getPropertyBySlug } from "@/lib/api";
 import { PropertyDetail } from "@/types";
-import ReserveButton from "@/components/ReserveButton"
+import ReserveButton from "@/components/ReserveButton";
+import ViewTracker from "@/components/ViewTracker";
 
 export default async function LodgeDetailPage({
   params,
@@ -22,6 +23,7 @@ export default async function LodgeDetailPage({
   return (
     <>
       <Header />
+      <ViewTracker path={`/lodges/${property.slug}`} propertyId={property.id} />
       <main className="max-w-4xl mx-auto px-4 py-6">
         <div className="relative h-72 md:h-96 bg-surface-muted rounded-xl overflow-hidden mb-6">
           {coverImage ? (
@@ -29,6 +31,7 @@ export default async function LodgeDetailPage({
               src={coverImage.image}
               alt={property.title}
               fill
+              sizes="(max-width: 768px) 100vw, 800px"
               className="object-cover"
               priority
             />

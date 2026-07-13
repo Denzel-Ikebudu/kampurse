@@ -64,3 +64,43 @@ export async function getRoommateRequests(searchParams?: Record<string, string>)
 
   return res.json();
 }
+
+interface CampusApiResult {
+  id: number;
+  name: string;
+  short_code: string;
+  slug: string;
+}
+
+interface AmenityApiResult {
+  id: number;
+  name: string;
+  icon_name: string;
+}
+
+interface CategoryApiResult {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export async function getCampuses(): Promise<CampusApiResult[]> {
+  const res = await fetch(`${API_BASE_URL}/campuses/`);
+  if (!res.ok) throw new Error("Failed to fetch campuses");
+  const data = await res.json();
+  return Array.isArray(data) ? data : (data.results ?? []);
+}
+
+export async function getAmenities(): Promise<AmenityApiResult[]> {
+  const res = await fetch(`${API_BASE_URL}/amenities/`);
+  if (!res.ok) throw new Error("Failed to fetch amenities");
+  const data = await res.json();
+  return Array.isArray(data) ? data : (data.results ?? []);
+}
+
+export async function getCategories(): Promise<CategoryApiResult[]> {
+  const res = await fetch(`${API_BASE_URL}/categories/`);
+  if (!res.ok) throw new Error("Failed to fetch categories");
+  const data = await res.json();
+  return Array.isArray(data) ? data : (data.results ?? []);
+}

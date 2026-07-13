@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/', include('marketplace.urls')),
     path('api/', include('roommates.urls')),
     path('api/', include('transactions.urls')),
+    path('api/', include('accounts.urls')),
 
 ]
 

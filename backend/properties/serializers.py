@@ -17,7 +17,7 @@ class AmenitySerializer(serializers.ModelSerializer):
 class PropertyImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PropertyImage
-        fields = ["id", "image", "is_cover", "order"]
+        fields = ["id", "image", "property", "is_cover", "order"]
 
 
 class PropertyListSerializer(serializers.ModelSerializer):
@@ -58,3 +58,19 @@ class PropertyDetailSerializer(serializers.ModelSerializer):
             "amenities", "images",
             "status", "is_featured", "created_at",
         ]
+
+class PropertyWriteSerializer(serializers.ModelSerializer):
+        """
+        Used for CREATE and UPDATE only. Unlike PropertyDetailSerializer,
+        campus and amenities are writable — you send plain IDs
+        (e.g. campus: 1), not nested objects.
+        """
+        class Meta:
+            model = Property
+            fields = [
+                "id", "title", "campus", "location_area",
+                "latitude", "longitude",
+                "room_type", "initial_price", "subsequent_price",
+                "bedrooms", "bathrooms", "description",
+                "amenities", "status", "is_featured",
+            ]

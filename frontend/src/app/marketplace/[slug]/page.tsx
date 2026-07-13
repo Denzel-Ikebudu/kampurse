@@ -3,7 +3,8 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import { getItemBySlug } from "@/lib/api";
 import { ItemDetail } from "@/types";
-import ReserveButton from "@/components/ReserveButton"
+import ReserveButton from "@/components/ReserveButton";
+import ViewTracker from "@/components/ViewTracker";
 
 export default async function ItemDetailPage({
   params,
@@ -22,6 +23,7 @@ export default async function ItemDetailPage({
   return (
     <>
       <Header />
+      <ViewTracker path={`/marketplace/${item.slug}`} itemId={item.id} />
       <main className="max-w-4xl mx-auto px-4 py-6">
         <div className="relative h-72 md:h-96 bg-surface-muted rounded-xl overflow-hidden mb-6">
           {coverImage ? (
