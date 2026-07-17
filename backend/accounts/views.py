@@ -13,6 +13,7 @@ from .models import StaffLoginLog, PageView
 from .serializers import StaffTokenObtainSerializer, StaffProfileSerializer, PageViewSerializer
 from transactions.models import Transaction
 from django.contrib.auth.models import User
+from django.db.models import F
 
 
 class StaffListCreateView(generics.ListCreateAPIView):
@@ -74,23 +75,23 @@ class AnalyticsSummaryView(APIView):
 
         top_properties = (
             PageView.objects.filter(visited_at__gte=thirty_days_ago, property__isnull=False)
-            .values("property__title")
-            .annotate(count=Count("id"))
-            .order_by("-count")[:5]
+            .values(title=F("property__title"))
+            .annotate(view_count=Count("id"))
+            .order_by("-view_count")[:5]
         )
 
         top_items = (
             PageView.objects.filter(visited_at__gte=thirty_days_ago, item__isnull=False)
-            .values("item__title")
-            .annotate(count=Count("id"))
-            .order_by("-count")[:5]
+            .values(title=F("item__title"))
+            .annotate(view_count=Count("id"))
+            .order_by("-view_count")[:5]
         )
 
-        transaction_breakdown = (
+        transaction_status_breakdown = (
             Transaction.objects.values("status").annotate(count=Count("id"))
         )
 
-        total_revenue = (
+        completed_revenue = (
             Transaction.objects.filter(status=Transaction.Status.COMPLETED)
             .aggregate(total=Sum("amount"))["total"] or 0
         )
@@ -99,7 +100,7 @@ class AnalyticsSummaryView(APIView):
             "daily_views": list(daily_views),
             "top_properties": list(top_properties),
             "top_items": list(top_items),
-            "transaction_breakdown": list(transaction_breakdown),
-            "total_revenue": total_revenue,
-            "total_views_7_days": PageView.objects.filter(visited_at__gte=seven_days_ago).count(),
+            "transaction_status_breakdown": list(transaction_status_breakdown),
+            "completed_revenue": completed_revenue,
+            "total_views_7d": PageView.objects.filter(visited_at__gte=seven_days_ago).count(),
         })
