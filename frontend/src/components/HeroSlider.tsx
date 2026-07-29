@@ -62,18 +62,18 @@ export default function HeroSlider() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/50" />
 
-              <div className="relative h-full max-w-6xl mx-auto px-4 flex flex-col justify-between py-10">
+              <div className="relative h-full max-w-6xl mx-auto px-4 flex flex-col justify-between py-10 pt-15">
                 <div>
                   <span className="text-6xl md:text-8xl font-extrabold tracking-tight text-white">
                     KAM<span className="text-kampurse-green">PURSE</span>
                   </span>
                 </div>
 
-                <div className="max-w-md bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-                  <p className="text-kampurse-green font-medium text-sm uppercase tracking-wide mb-2">
+                <div className="max-w-[500px] p-6">
+                  <p className="text-kampurse-green font-medium text-sm md:text-md uppercase tracking-wide mb-2">
                     {slide.label}
                   </p>
-                  <h2 className="text-white text-2xl md:text-3xl font-semibold mb-5">
+                  <h2 className="font-sans text-white text-2xl md:text-5xl font-semibold mb-5"> 
                     {slide.heading}
                   </h2>
                   <Link

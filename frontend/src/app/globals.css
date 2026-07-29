@@ -9,6 +9,8 @@
   --color-kampurse-green-light: #eaf3de;
   --color-kampurse-urgent: #e24b4a;
   --color-kampurse-urgent-light: #fcebeb;
+  --color-kampurse-navy: #0f1f38;
+  --color-kampurse-navy-light: #1a3357;
 
   --color-background: var(--background);
   --color-surface: var(--surface);

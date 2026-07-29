@@ -13,17 +13,19 @@ export default function Header({ overlay = false }: { overlay?: boolean }) {
               <Home size={16} className="text-white" />
             </div>
           </Link>
+          
+          <div className="md:flex items-center">
+            <nav className="hidden md:flex items-center gap-8 text-xs font-medium tracking-[0.15em] uppercase text-white/90">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <Link href="/lodges" className="hover:text-white transition-colors">Lodges</Link>
+              <Link href="/marketplace" className="hover:text-white transition-colors">Marketplace</Link>
+              <Link href="/roommates" className="hover:text-white transition-colors">Roommates</Link>
+            </nav>
 
-          <nav className="hidden md:flex items-center gap-8 text-xs font-medium tracking-[0.15em] uppercase text-white/90">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <Link href="/lodges" className="hover:text-white transition-colors">Lodges</Link>
-            <Link href="/marketplace" className="hover:text-white transition-colors">Marketplace</Link>
-            <Link href="/roommates" className="hover:text-white transition-colors">Roommates</Link>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <MobileNav overlay />
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <MobileNav overlay />
+            </div>
           </div>
         </div>
       </header>
