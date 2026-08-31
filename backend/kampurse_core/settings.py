@@ -100,11 +100,11 @@ WSGI_APPLICATION = 'kampurse_core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': config('kampurse_db'),
+        'USER': config('postgres'),
+        'PASSWORD': config('kampurse2024'),
+        'HOST': config('localhost'),
+        'PORT': config('5432'),
     }
 }
 
