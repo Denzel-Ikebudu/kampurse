@@ -1,7 +1,9 @@
-from rest_framework.routers import DefaultRouter
+
+
+from rest_framework.routers import SimpleRouter
 from .views import PropertyViewSet, CampusViewSet, AmenityViewSet, PropertyImageViewSet
 
-router = DefaultRouter()
+router = SimpleRouter()
 router.register(r'properties', PropertyViewSet, basename='property')
 router.register(r'campuses', CampusViewSet, basename='campus')
 router.register(r'amenities', AmenityViewSet, basename='amenity')
