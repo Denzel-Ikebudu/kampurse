@@ -9,6 +9,7 @@ class RoommateRequest(models.Model):
         ANY = "any", "No Preference"
 
     class RequestStatus(models.TextChoices):
+        PENDING = "pending", "Pending Approval"
         OPEN = "open", "Open"
         MATCHED = "matched", "Matched"
         CLOSED = "closed", "Closed"
@@ -32,7 +33,7 @@ class RoommateRequest(models.Model):
     move_in_date = models.DateField(null=True, blank=True)
     description = models.TextField(help_text="A short bio/note about the student & what they're looking for")
 
-    status = models.CharField(max_length=20, choices=RequestStatus.choices, default=RequestStatus.OPEN)
+    status = models.CharField(max_length=20, choices=RequestStatus.choices, default=RequestStatus.PENDING)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

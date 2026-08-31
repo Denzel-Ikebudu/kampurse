@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Building2, ShoppingBag, Users, Handshake, LogOut } from "lucide-react";
+import { LayoutDashboard, Building2, ShoppingBag, Users, Handshake, LogOut, UserCheck } from "lucide-react";
 import { getAccessToken, getCurrentUser, logout, StaffUser } from "@/lib/auth";
 
 const navItems = [
   { href: "/dashboard/overview", label: "Overview", icon: LayoutDashboard, roles: ["owner"] },
   { href: "/dashboard/listings", label: "Listings", icon: Building2, roles: ["owner", "content_manager"] },
   { href: "/dashboard/marketplace", label: "Marketplace", icon: ShoppingBag, roles: ["owner", "content_manager"] },
+  { href: "/dashboard/roommates", label: "Roommates", icon: UserCheck, roles: ["owner", "content_manager"] },
   { href: "/dashboard/transactions", label: "Transactions", icon: Handshake, roles: ["owner", "support_sales"] },
   { href: "/dashboard/staff", label: "Staff", icon: Users, roles: ["owner"] },
 ];

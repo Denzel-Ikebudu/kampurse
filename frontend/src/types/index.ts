@@ -110,6 +110,7 @@ export interface ItemDetail {
 export interface RoommateRequestItem {
   id: number;
   student_name: string;
+  student_contact: string
   campus: string;
   preferred_location: string;
   linked_property: number | null;

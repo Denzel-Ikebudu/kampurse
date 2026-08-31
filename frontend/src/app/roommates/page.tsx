@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import RoommateCard from "@/components/RoommateCard";
+import RoommateSubmitModal from "@/components/RoommateSubmitModal";
 import { getRoommateRequests } from "@/lib/api";
 import { RoommateRequestItem, PaginatedResponse } from "@/types";
 
@@ -10,7 +11,10 @@ export default async function RoommatesPage() {
     <>
       <Header />
       <main className="max-w-4xl mx-auto px-4 py-6">
-        <h1 className="text-xl font-medium mb-4">Find a Roommate — UNN</h1>
+        <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+          <h1 className="text-xl font-medium">Find a Roommate — UNN</h1>
+          <RoommateSubmitModal />
+        </div>
 
         {data.results.length === 0 ? (
           <p className="text-foreground-muted text-sm">No roommate requests yet.</p>

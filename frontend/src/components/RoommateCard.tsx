@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import { RoommateRequestItem } from "@/types";
-import { User, MapPin, Calendar, Wallet } from "lucide-react";
+import { User, MapPin, Calendar, Wallet, Phone } from "lucide-react";
 
 const genderLabels: Record<string, string> = {
   male: "Male",
@@ -8,6 +11,9 @@ const genderLabels: Record<string, string> = {
 };
 
 export default function RoommateCard({ request }: { request: RoommateRequestItem }) {
+  const [revealed, setRevealed] = useState(false);
+  const lodgeLabel = request.linked_property_title || request.preferred_location;
+
   return (
     <div className="bg-surface border border-border rounded-xl p-4">
       <div className="flex items-start justify-between mb-3">
@@ -25,22 +31,27 @@ export default function RoommateCard({ request }: { request: RoommateRequestItem
         </span>
       </div>
 
+      {lodgeLabel && (
+        <p className="text-xs text-kampurse-green-dark bg-kampurse-green-light rounded-md px-3 py-2 mb-3 flex items-center gap-1.5">
+          <MapPin size={13} className="shrink-0" />
+          {request.linked_property_title
+            ? `Has a lodge: ${lodgeLabel} (listed on Kampurse)`
+            : `Has a lodge: ${lodgeLabel}`}
+        </p>
+      )}
+
       <p className="text-sm text-foreground-muted leading-relaxed mb-3">
         {request.description}
       </p>
 
       <div className="flex flex-wrap gap-3 text-xs text-foreground-muted mb-4">
-        {request.preferred_location && (
-          <span className="flex items-center gap-1">
-            <MapPin size={13} /> {request.preferred_location}
-          </span>
-        )}
         {(request.budget_min || request.budget_max) && (
           <span className="flex items-center gap-1">
             <Wallet size={13} />
             {request.budget_min && `₦${Number(request.budget_min).toLocaleString()}`}
             {request.budget_min && request.budget_max && " – "}
             {request.budget_max && `₦${Number(request.budget_max).toLocaleString()}`}
+            {" "}for roommate
           </span>
         )}
         {request.move_in_date && (
@@ -50,15 +61,19 @@ export default function RoommateCard({ request }: { request: RoommateRequestItem
         )}
       </div>
 
-      {request.linked_property_title && (
-        <p className="text-xs text-kampurse-green-dark bg-kampurse-green-light rounded-md px-3 py-2 mb-4">
-          Has a lodge already: {request.linked_property_title}
-        </p>
+      {revealed ? (
+        <div className="w-full bg-kampurse-green-light text-kampurse-green-dark text-sm py-2 rounded-md flex items-center justify-center gap-2">
+          <Phone size={14} />
+          {request.student_contact}
+        </div>
+      ) : (
+        <button
+          onClick={() => setRevealed(true)}
+          className="w-full bg-kampurse-green text-white text-sm py-2 rounded-md hover:bg-kampurse-green-dark transition-colors"
+        >
+          I&apos;m interested
+        </button>
       )}
-
-      <button className="w-full bg-kampurse-green text-white text-sm py-2 rounded-md hover:bg-kampurse-green-dark transition-colors">
-        I&apos;m interested
-      </button>
     </div>
   );
 }
