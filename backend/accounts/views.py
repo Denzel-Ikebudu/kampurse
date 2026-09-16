@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from accounts.permissions import IsOwner
 from .models import StaffProfile
 from .serializers import StaffListSerializer, StaffCreateSerializer, StaffUpdateSerializer
@@ -22,6 +22,14 @@ class StaffListCreateView(generics.ListCreateAPIView):
 
     def get_serializer_class(self):
         return StaffCreateSerializer if self.request.method == "POST" else StaffListSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        staff_profile = serializer.save()
+        output_serializer = StaffListSerializer(staff_profile)
+        headers = self.get_success_headers(output_serializer.data)
+        return Response(output_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class StaffDetailView(generics.RetrieveUpdateAPIView):
