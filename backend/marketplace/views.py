@@ -30,6 +30,8 @@ class ItemViewSet(viewsets.ModelViewSet):
             return ItemListSerializer
         if self.action in ["create", "update", "partial_update"]:
             return ItemWriteSerializer
+        if self.action == "retrieve" and self.request.user.is_authenticated:
+            return ItemWriteSerializer
         return ItemDetailSerializer
 
     def get_serializer_context(self):
