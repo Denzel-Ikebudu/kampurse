@@ -44,10 +44,12 @@ class ItemViewSet(viewsets.ModelViewSet):
 
 
 class ItemCategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ItemCategory.objects.all()
     serializer_class = ItemCategorySerializer
     permission_classes = [permissions.AllowAny]
     pagination_class = None
+
+    def get_queryset(self):
+        return ItemCategory.objects.all()
 
 
 class ItemImageViewSet(viewsets.ModelViewSet):

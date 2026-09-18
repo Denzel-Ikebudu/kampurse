@@ -53,17 +53,21 @@ class PropertyViewSet(viewsets.ModelViewSet):
 
 
 class CampusViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Campus.objects.filter(is_active=True)
     serializer_class = CampusSerializer
     permission_classes = [permissions.AllowAny]
     pagination_class = None
 
+    def get_queryset(self):
+        return Campus.objects.filter(is_active=True)
+
 
 class AmenityViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Amenity.objects.all()
     serializer_class = AmenitySerializer
     permission_classes = [permissions.AllowAny]
     pagination_class = None
+
+    def get_queryset(self):
+        return Amenity.objects.all()
 
 class PropertyImageViewSet(viewsets.ModelViewSet):
     queryset = PropertyImage.objects.all()
