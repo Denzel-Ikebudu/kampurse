@@ -11,7 +11,7 @@ class ItemCategorySerializer(serializers.ModelSerializer):
 class ItemImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemImage
-        fields = ["id", "property", "image", "is_cover", "order"]
+        fields = ["id", "item", "image", "is_cover", "order"]
 
 
 class ItemListSerializer(serializers.ModelSerializer):

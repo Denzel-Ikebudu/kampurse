@@ -106,7 +106,8 @@ export default function PropertyForm({ editSlug }: { editSlug?: string }) {
       }
 
       router.push("/dashboard/listings");
-    } catch {
+    } catch (err) {
+      console.error("Save failed:", err);
       setError("Could not save. Check all required fields are filled correctly.");
     } finally {
       setIsSubmitting(false);

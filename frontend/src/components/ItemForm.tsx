@@ -91,13 +91,13 @@ export default function ItemForm({ editSlug }: { editSlug?: string }) {
       if (images && images.length > 0) {
         for (let i = 0; i < images.length; i++) {
           const formData = new FormData();
-          formData.append("property", String(saved.id));
+          formData.append("item", String(saved.id));
           formData.append("image", images[i]);
           formData.append("is_cover", i === 0 ? "true" : "false");
           formData.append("order", String(i));
 
           const token = localStorage.getItem("kampurse_access_token");
-          const imgRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/property-images/`, {
+          const imgRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/item-images/`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
             body: formData,
@@ -112,7 +112,8 @@ export default function ItemForm({ editSlug }: { editSlug?: string }) {
       }
 
       router.push("/dashboard/marketplace");
-    } catch {
+    } catch (err) {
+      console.error("Save failed:", err);
       setError("Could not save. Check all required fields are filled correctly.");
     } finally {
       setIsSubmitting(false);
