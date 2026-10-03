@@ -51,6 +51,12 @@ class PropertyViewSet(viewsets.ModelViewSet):
             return [permissions.AllowAny()]
         return [IsContentManagerOrOwner()]
 
+    def perform_destroy(self, instance):
+        for image in instance.images.all():
+            image.image.delete(save=False)
+
+        instance.delete()
+
 
 class CampusViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CampusSerializer

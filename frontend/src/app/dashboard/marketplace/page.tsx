@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { authFetch } from "@/lib/auth";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 interface ItemRow {
   id: number;
@@ -34,6 +34,25 @@ export default function DashboardMarketplacePage() {
     }
     load();
   }, []);
+
+  async function deleteItem(slug: string, title: string) {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${title}"? This will also delete its images.`
+    );
+
+    if (!confirmed) return;
+
+    const res = await authFetch(`/items/${slug}/`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      alert("Could not delete this item. Please try again.");
+      return;
+    }
+
+    setItems((prev) => prev.filter((item) => item.slug !== slug));
+  }
 
   return (
     <div className="space-y-4">
@@ -78,9 +97,23 @@ export default function DashboardMarketplacePage() {
                     </span>
                   </td>
                   <td className="px-4 py-2.5 text-right">
-                    <Link href={`/dashboard/marketplace/${item.slug}/edit`} className="text-kampurse-green-dark hover:underline">
-                      Edit
-                    </Link>
+                    <div className="flex items-center justify-end gap-3">
+                      <Link
+                        href={`/dashboard/marketplace/${item.slug}/edit`}
+                        className="text-kampurse-green-dark hover:underline"
+                      >
+                        Edit
+                      </Link>
+
+                      <button
+                        type="button"
+                        onClick={() => deleteItem(item.slug, item.title)}
+                        className="flex items-center gap-1 text-kampurse-urgent hover:underline"
+                      >
+                        <Trash2 size={14} />
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

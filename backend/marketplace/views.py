@@ -42,6 +42,12 @@ class ItemViewSet(viewsets.ModelViewSet):
             return [permissions.AllowAny()]
         return [IsContentManagerOrOwner()]
 
+    def perform_destroy(self, instance):
+        for image in instance.images.all():
+            image.image.delete(save=False)
+
+        instance.delete()
+
 
 class ItemCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ItemCategorySerializer

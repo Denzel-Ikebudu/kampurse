@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { authFetch } from "@/lib/auth";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 interface PropertyRow {
   id: number;
@@ -31,18 +31,42 @@ export default function ListingsPage() {
       setProperties(data.results ?? []);
       setLoading(false);
     }
+
     load();
   }, []);
+
+  async function deleteProperty(slug: string, title: string) {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${title}"? This will also delete its images.`
+    );
+
+    if (!confirmed) return;
+
+    const res = await authFetch(`/properties/${slug}/`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      alert("Could not delete this property. Please try again.");
+      return;
+    }
+
+    setProperties((prev) =>
+      prev.filter((property) => property.slug !== slug)
+    );
+  }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-medium">Listings — Lodges</h1>
+
         <Link
           href="/dashboard/listings/new"
           className="flex items-center gap-1.5 bg-kampurse-green text-white text-sm px-3 py-2 rounded-md hover:bg-kampurse-green-dark transition-colors"
         >
-          <Plus size={16} /> New Property
+          <Plus size={16} />
+          New Property
         </Link>
       </div>
 
@@ -60,21 +84,46 @@ export default function ListingsPage() {
                 <th className="text-left px-4 py-2"></th>
               </tr>
             </thead>
+
             <tbody>
               {properties.map((p) => (
                 <tr key={p.id} className="border-t border-border">
                   <td className="px-4 py-2.5">{p.title}</td>
+
                   <td className="px-4 py-2.5">{p.campus}</td>
-                  <td className="px-4 py-2.5">₦{Number(p.initial_price).toLocaleString()}</td>
+
                   <td className="px-4 py-2.5">
-                    <span className={`text-xs px-2 py-1 rounded-full ${statusColors[p.status] ?? ""}`}>
+                    ₦{Number(p.initial_price).toLocaleString()}
+                  </td>
+
+                  <td className="px-4 py-2.5">
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full ${
+                        statusColors[p.status] ?? ""
+                      }`}
+                    >
                       {p.status}
                     </span>
                   </td>
+
                   <td className="px-4 py-2.5 text-right">
-                    <Link href={`/dashboard/listings/${p.slug}/edit`} className="text-kampurse-green-dark hover:underline">
-                      Edit
-                    </Link>
+                    <div className="flex items-center justify-end gap-3">
+                      <Link
+                        href={`/dashboard/listings/${p.slug}/edit`}
+                        className="text-kampurse-green-dark hover:underline"
+                      >
+                        Edit
+                      </Link>
+
+                      <button
+                        type="button"
+                        onClick={() => deleteProperty(p.slug, p.title)}
+                        className="flex items-center gap-1 text-kampurse-urgent hover:underline"
+                      >
+                        <Trash2 size={14} />
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
