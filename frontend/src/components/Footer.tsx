@@ -9,7 +9,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0f1f38] mt-auto overflow-hidden">
+    <footer className="bg-background mt-auto overflow-hidden">
       <motion.div 
         className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-8"
         initial={{ opacity: 0 }}
