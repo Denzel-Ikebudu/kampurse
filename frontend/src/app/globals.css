@@ -3,15 +3,21 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Kampurse brand */
   --color-kampurse-green: #639922;
   --color-kampurse-green-dark: #3b6d11;
   --color-kampurse-green-darker: #27500a;
   --color-kampurse-green-light: #eaf3de;
+
+  /* Status */
   --color-kampurse-urgent: #e24b4a;
   --color-kampurse-urgent-light: #fcebeb;
+
+  /* Navy */
   --color-kampurse-navy: #0f1f38;
   --color-kampurse-navy-light: #1a3357;
 
+  /* Theme colors */
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
@@ -19,6 +25,7 @@
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
 
+  /* Typography */
   --font-sans: var(--font-montserrat), sans-serif;
 }
 
@@ -27,20 +34,73 @@
   --surface: #ffffff;
   --surface-muted: #f7f8f6;
   --border: #e5e7e0;
-  --foreground: #1a1a1a;
-  --foreground-muted: #6b6f66;
+  --foreground: #171a14;
+  --foreground-muted: #687064;
 }
 
 .dark {
-  --background: #121212;
-  --surface: #1a1a1a;
-  --surface-muted: #232323;
-  --border: #2e2e2e;
-  --foreground: #f2f2f2;
-  --foreground-muted: #a3a3a3;
+  --background: #111311;
+  --surface: #191c18;
+  --surface-muted: #222620;
+  --border: #30352e;
+  --foreground: #f4f6f2;
+  --foreground-muted: #a5aca0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-kampurse-green);
+  color: white;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.dark img {
+  opacity: 0.96;
+}
+
+.kampurse-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.kampurse-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/hero/Hero-bg.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.kampurse-hero > div {
+  position: relative;
+  z-index: 1;
 }

@@ -1,9 +1,6 @@
-import Header from "@/components/Header";
-
 export default function AboutPage() {
   return (
     <>
-      <Header />
       <main className="max-w-3xl mx-auto px-4 py-14">
         <h1 className="text-2xl font-semibold mb-6 text-center">About Kampurse</h1>
 

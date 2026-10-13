@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import RoommateCard from "@/components/RoommateCard";
 import RoommateSubmitModal from "@/components/RoommateSubmitModal";
 import { getRoommateRequests } from "@/lib/api";
@@ -9,7 +8,6 @@ export default async function RoommatesPage() {
 
   return (
     <>
-      <Header />
       <main className="max-w-4xl mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
           <h1 className="text-xl font-medium">Find a Roommate — UNN</h1>

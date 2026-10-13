@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -12,7 +13,8 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Kampurse — Campus Housing & Marketplace",
-  description: "Find verified lodges, buy and sell items, and connect with roommates at UNN.",
+  description:
+    "Find verified lodges, buy and sell items, and connect with roommates at UNN.",
 };
 
 export default function RootLayout({
@@ -22,7 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${montserrat.variable} font-sans antialiased`}>
+      <body className={`${montserrat.variable} antialiased`}>
+        <Header />
         <Script id="theme-init" strategy="beforeInteractive">
           {`
             (function() {
@@ -33,7 +36,9 @@ export default function RootLayout({
             })();
           `}
         </Script>
+
         {children}
+
         <Footer />
       </body>
     </html>

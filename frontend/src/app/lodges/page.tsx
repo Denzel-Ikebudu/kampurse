@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import PropertyCard from "@/components/PropertyCard";
 import LodgeFilters from "@/components/LodgeFilters";
 import { getProperties } from "@/lib/api";
@@ -19,7 +18,6 @@ export default async function LodgesPage({
 const data: PaginatedResponse<PropertyListItem> = await getProperties(apiParams);
   return (
     <>
-      <Header />
       <main className="max-w-6xl mx-auto px-4 py-6">
         <h1 className="text-xl font-medium mb-4">Lodges — UNN</h1>
 

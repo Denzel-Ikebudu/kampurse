@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import ItemCard from "@/components/ItemCard";
 import { getItems } from "@/lib/api";
 import { ItemListItem, PaginatedResponse } from "@/types";
@@ -9,7 +8,6 @@ export default async function MarketplacePage() {
 
   return (
     <>
-      <Header />
       <main className="max-w-6xl mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-medium">Marketplace — UNN</h1>
