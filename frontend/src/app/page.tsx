@@ -31,7 +31,7 @@ const services = [
     description:
       "Buy useful items or sell things you no longer need to students around your campus.",
     href: "/marketplace",
-    image: "/hero/marketplace.png",
+    image: "/hero/marketplace.jpg",
   },
   {
     number: "03",
