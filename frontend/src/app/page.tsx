@@ -61,7 +61,7 @@ export default function Home() {
 
               <HeroFade delay={0.15}>
                 <h1 className="text-5xl font-bold leading-[1.05] tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">
-                  Shopping life,
+                  Shopping life
                   <br />
                   <span className="text-kampurse-green">
                     made simpler.
